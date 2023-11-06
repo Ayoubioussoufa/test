@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sben-ela <sben-ela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aybiouss <aybiouss@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/11 16:30:52 by aybiouss          #+#    #+#             */
-/*   Updated: 2023/03/17 19:12:17 by sben-ela         ###   ########.fr       */
+/*   Updated: 2023/11/06 15:41:08 by aybiouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ void	execute_cmd(t_shell *shell, char **env)
 	char	**paths;
 	char	*argv;
 
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, sigint_handler);
+	// signal(SIGINT, sigint_handler);
+	// signal(SIGQUIT, sigint_handler);
 	paths = NULL;
 	argv = NULL;
 	paths = get_paths(env, shell);

@@ -248,4 +248,6 @@ int			pwd_builtin(char *cmd);
 //builtin unset
 int			unset_builtin(char **cmd, t_env *env);
 
+char *custom_readline(const char *prompt);
+
 #endif

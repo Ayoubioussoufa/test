@@ -1,6 +1,6 @@
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g2
-READ = -L/Users/sben-ela/.brew/opt/readline/lib
-INCLUDE = -I/Users/sben-ela/.brew/opt/readline/include
+#READ = -L/Users/sben-ela/.brew/opt/readline/lib
+#INCLUDE = -I/Users/sben-ela/.brew/opt/readline/include
 PROG = minishell
 LIBFT = Libft/libft.a
 PARSING = handle_quotes.c expanding.c  parse.c parse_read.c parse_line.c  signals.c
@@ -19,14 +19,14 @@ OBJECTS = $(SOURCES:.c=.o)
 
 all : $(PROG)
 $(PROG) : $(OBJECTS)
-	$(CC) $(CFLAGS) -o $(PROG) $(OBJECTS) -lreadline $(READ)
+	$(CC) $(CFLAGS) -o $(PROG) $(OBJECTS)
 	
-
+#-lreadline $(READ)
 %.o : %.c
-	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 $(LIBFT) :
 	make -C ./Libft
-
+#$(INCLUDE)
 clean:
 	rm -f $(OBJECTS)
 	make -C libft clean

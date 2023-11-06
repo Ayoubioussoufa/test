@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sben-ela <sben-ela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aybiouss <aybiouss@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:32:05 by aybiouss          #+#    #+#             */
-/*   Updated: 2023/03/17 19:12:17 by sben-ela         ###   ########.fr       */
+/*   Updated: 2023/11/06 15:41:04 by aybiouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,33 @@ void	freedata(t_shell *shell, char **line, char **read)
 	}
 }
 
+char *custom_readline(const char *prompt) {
+    char *line = NULL;
+    size_t bufsize = 0;
+    printf("%s", prompt);
+    
+    ssize_t n = getline(&line, &bufsize, stdin);
+
+    if (n == -1) {
+        free(line);
+        return NULL; // End of input or error occurred.
+    }
+
+    if (line[n - 1] == '\n') {
+        line[n - 1] = '\0'; // Remove the newline character.
+    }
+
+    return line;
+}
+
 void	mini_shell(t_env *ev, t_shell *shell, char *read, char *line)
 {
 	while (1)
 	{
-		read = readline("\033[1;34m➜  Minishell ✗ \033[0m");
+		read = custom_readline("\033[1;34m➜  Minishell ✗ \033[0m");
 		if (!read)
 			(printf("exit\n"), exit(g_status));
-		add_history(read);
+		// add_history(read);
 		if (read[0] && !parse_syntax(read))
 		{
 			line = malloc(ft_strlen(read) + 1 + (count_redirect(read) * 2));
@@ -105,8 +124,8 @@ int	main(int ac, char **av, char **env)
 		printf("Invalid number of argument\n");
 		return (0);
 	}
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, SIG_IGN);
+	// signal(SIGINT, sigint_handler);
+	// signal(SIGQUIT, SIG_IGN);
 	mini_shell(ev, 0, 0, 0);
 	return (g_status);
 }

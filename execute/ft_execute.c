@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sben-ela <sben-ela@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aybiouss <aybiouss@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 18:28:01 by aybiouss          #+#    #+#             */
-/*   Updated: 2023/03/17 19:12:17 by sben-ela         ###   ########.fr       */
+/*   Updated: 2023/11/06 15:41:18 by aybiouss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	ft_execute(t_shell *shell, t_env *env)
 {
 	pid_t	pid;
 
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, sigint_handler);
+	// signal(SIGINT, sigint_handler);
+	// signal(SIGQUIT, sigint_handler);
 	if (if_directory(shell->cmds[0]))
 		return ;
 	if (check_builtins(shell->cmds[0]) == 1)
@@ -48,8 +48,8 @@ void	ft_execute(t_shell *shell, t_env *env)
 
 void	child(t_shell *shell, t_env *env, int fd[2])
 {
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, sigint_handler);
+	// signal(SIGINT, sigint_handler);
+	// signal(SIGQUIT, sigint_handler);
 	close(fd[0]);
 	exec_redirp(shell);
 	dup_close(&shell->cmd->fd);
@@ -64,7 +64,7 @@ void	child(t_shell *shell, t_env *env, int fd[2])
 
 void	waitchilds(int orig_stdin, int orig_stdout)
 {
-	signal(SIGINT, sigint_handler);
+	// signal(SIGINT, sigint_handler);
 	while (wait(NULL) != -1)
 		;
 	if (WIFEXITED(g_status))
